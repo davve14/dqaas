@@ -2,6 +2,7 @@
 
 # Pre-reqs
 npm
+
 sbt
 
 # Installation
@@ -18,4 +19,5 @@ npm install
 npm run dev
 
 cd ../dqaas-server
+
 sbt run -p 9696
