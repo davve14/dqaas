@@ -18,6 +18,8 @@ npm install
 
 npm run dev
 
+--start server side server
+
 cd ../dqaas-server
 
 sbt run -p 9696
