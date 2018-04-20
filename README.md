@@ -10,6 +10,7 @@ extract package so that you have a dqaas-client folder and and dqaas-server fold
 cd dqaas-client
 
 --download dependencies
+
 npm install
 
 --start the node server
