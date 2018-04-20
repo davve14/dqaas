@@ -6,7 +6,9 @@ sbt
 
 # Installation
 extract package so that you have a dqaas-client folder and and dqaas-server folder
+
 cd dqaas-client
+
 --download dependencies
 npm install
 
