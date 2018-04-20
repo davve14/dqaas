@@ -14,6 +14,7 @@ cd dqaas-client
 npm install
 
 --start the node server
+
 npm run dev
 
 cd ../dqaas-server
