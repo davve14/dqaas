@@ -22,4 +22,5 @@ npm run dev
 
 cd ../dqaas-server
 
-sbt "run 9696"
+--run with auto commit (~)
+sbt "~run 9696"
