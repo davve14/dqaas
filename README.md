@@ -22,4 +22,4 @@ npm run dev
 
 cd ../dqaas-server
 
-sbt run -p 9696
+sbt "run 9696"
