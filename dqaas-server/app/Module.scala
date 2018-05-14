@@ -3,7 +3,7 @@ import javax.inject._
 import com.google.inject.AbstractModule
 import net.codingwell.scalaguice.ScalaModule
 import play.api.{Configuration, Environment}
-import v1.post._
+import handlers._
 
 /**
   * Sets up custom components for Play.

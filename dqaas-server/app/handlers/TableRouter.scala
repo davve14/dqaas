@@ -1,4 +1,4 @@
-package v1.post
+package handlers
 
 import javax.inject.Inject
 
@@ -9,7 +9,7 @@ import play.api.routing.sird._
 /**
   * Routes and URLs to the PostResource controller.
   */
-class PostRouter @Inject()(controller: PostController) extends SimpleRouter {
+class TableRouter @Inject()(controller: TableController) extends SimpleRouter {
   val prefix = "/v1/posts"
 
   def link(id: PostId): String = {

@@ -1,4 +1,4 @@
-package v1.post
+package handlers
 
 import javax.inject.{Inject, Singleton}
 

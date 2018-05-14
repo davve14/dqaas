@@ -28,7 +28,7 @@ lazy val root = (project in file("."))
   .configs(GatlingTest)
   .settings(inConfig(GatlingTest)(Defaults.testSettings): _*)
   .settings(
-    name := """dqaas-server""",
+    name := """play-scala-rest-api-example""",
     scalaSource in GatlingTest := baseDirectory.value / "/gatling/simulation"
   )
 
