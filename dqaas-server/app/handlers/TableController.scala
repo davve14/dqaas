@@ -6,8 +6,10 @@ import play.api.Logger
 import play.api.data.Form
 import play.api.libs.json.Json
 import play.api.mvc._
-
+import scala.concurrent.Await
+import scala.concurrent._
 import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.duration._
 
 case class PostFormInput(title: String, body: String)
 
@@ -33,10 +35,12 @@ class TableController @Inject()(cc: TableControllerComponents)(implicit ec: Exec
   def index: Action[AnyContent] = TableAction.async { implicit request =>
     logger.trace("index: ")
     
-    //tableResourceHandler.getTables()
+    val res = Await.result(tableResourceHandler.getTables(),2.seconds)
     
-    tableResourceHandler.find.map { posts =>
-      Ok(Json.toJson(posts)).withHeaders("Access-Control-Allow-Origin" -> "*")
+    println(res)
+    
+    tableResourceHandler.getTables.map { tables =>
+      Ok(Json.toJson(tables)).withHeaders("Access-Control-Allow-Origin" -> "*")
     }
     
   }

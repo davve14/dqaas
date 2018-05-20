@@ -2,7 +2,7 @@ import sbt.Keys._
 
 lazy val GatlingTest = config("gatling") extend Test
 
-scalaVersion in ThisBuild := "2.12.4"
+scalaVersion in ThisBuild := "2.11.12"
 
 crossScalaVersions := Seq("2.11.12", "2.12.4")
 
@@ -17,6 +17,9 @@ libraryDependencies += "net.logstash.logback" % "logstash-logback-encoder" % "4.
 
 libraryDependencies += "com.netaporter" %% "scala-uri" % "0.4.16"
 libraryDependencies += "net.codingwell" %% "scala-guice" % "4.1.1"
+libraryDependencies += "com.typesafe.akka" %% "akka-http-spray-json" % "10.1.1"
+libraryDependencies += "com.typesafe.akka" %% "akka-http" % "10.1.1"
+libraryDependencies += "org.apache.spark" % "spark-core_2.11" % "2.2.0"
 
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % Test
 libraryDependencies += "io.gatling.highcharts" % "gatling-charts-highcharts" % gatlingVersion(scalaBinaryVersion.value) % Test

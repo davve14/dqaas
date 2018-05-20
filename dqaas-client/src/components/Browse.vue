@@ -1,24 +1,34 @@
 <template>
     <div class="container">
-            <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+            <table class="table is-striped is-narrow is-hoverable is-fullwidth">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Link</th>
-                        <th>Title</th>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Owner</th>
+                        <th>DQ Score</th>
                     </tr>
                 </thead>
+                <tbody>
                 <tr v-for="entry in posts">
+                    <td><a href="http://www.google.de">
+                        {{entry.name}}
+                    </a></td>
                     <td>
-                        {{entry.id}}
+                        {{entry.typeName}}
                     </td>
                     <td>
-                        {{entry.link}}
+                        {{entry.status}}
                     </td>
                     <td>
-                        {{entry.title}}
+                        {{entry.owner}}
+                    </td>
+                    <td>
+                        Unprocessed
                     </td>
                 </tr>
+                </tbody>
             </table>
         </div>
 </template>

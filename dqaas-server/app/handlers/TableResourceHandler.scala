@@ -5,12 +5,13 @@ import play.api.MarkerContext
 import scala.concurrent.{ExecutionContext, Future}
 import play.api.libs.json._
 import metadata._
-import akka.http.scaladsl.model._
+
 
 /**
   * DTO for displaying post information.
   */
 case class TableResource(id: String, link: String, title: String, body: String)
+
 
 object TableResource {
 
@@ -59,10 +60,14 @@ class TableResourceHandler @Inject()(
     }
   }
 
-  def getTables(): String = {
+  def getTables(): Future[Iterable[Entities]] = {
     println("getting from atlas")
-    val atlas = new HiveTableHandler()
-    atlas.getAtlasHiveTables()
+    //val DQ = new TableDQHandler()
+    //DQ.runTDQEvaluation()
+    val futureListHiveTables: Future[Iterable[Entities]] = HiveTableHandler.getAtlasHiveTables() map { iterable_entities =>
+      iterable_entities.entities
+    }
+    futureListHiveTables
   }
   
   private def createTableResource(p: PostData): TableResource = {
