@@ -70,6 +70,20 @@ class TableResourceHandler @Inject()(
     futureListHiveTables
   }
   
+  def getTable(tableGuid: String): Future[HiveTable] = {
+    println("getting from atlas table")
+    
+    val futureHiveTable: Future[Source] = HiveTableHandler.getAtlasHiveTable(tableGuid) map { root =>
+      root
+    }
+    
+    val FinalHiveTable = futureHiveTable.map { fht =>
+      HiveTable(fht.entity.guid,fht.entity.typeName,fht.entity.attributes.name,fht.referredEntities)
+    }
+    FinalHiveTable
+    
+  }
+  
   private def createTableResource(p: PostData): TableResource = {
     TableResource(p.id.toString, routerProvider.get.link(p.id), p.title, p.body)
   }

@@ -5,12 +5,11 @@ package metadata
 class TableDQHandler() {
   def runTDQEvaluation(): Unit = {
     
-   // val master = "http://sandbox-hdp.hortonworks.com:7077"
-   // val conf = new SparkConf().setAppName("test").setMaster(master)
-    //val sc = new SparkContext(conf)
-   // val data = Array(1, 2, 3, 4, 5)
-    //val distData = sc.parallelize(data)
-    println("test")
-    
+//    val master = "yarn-cluster"
+//    val conf = new SparkConf().setAppName("test").setMaster(master)
+//    val sc = new SparkContext(conf)
+//    val data = Array(1, 2, 3, 4, 5)
+//    val distData = sc.parallelize(data)
+    println("distData")
   }
 }

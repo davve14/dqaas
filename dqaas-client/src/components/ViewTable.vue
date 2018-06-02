@@ -1,28 +1,31 @@
 <template>
     <div class="container">
+<div class="columns">
+  <div class="column is-one-third">
+    <div class="box">
+      <p class="title is-8">{{tableData.name}}</p>
+      <p>{{tableData.typeName}}</p>
+      <p>{{tableData.entityTypeName}}</p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="box">
+      <p class="title is-4">Columns</p>
             <table class="table is-striped is-narrow is-hoverable is-fullwidth">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Status</th>
-                        <th>Owner</th>
+                        <th>Colum name</th>
+                        <th>Datatype</th>
                         <th>DQ Score</th>
                     </tr>
                 </thead>
                 <tbody>
-                <tr v-for="entry in posts">
-                    <td><a :href="'/#/browse/table/' + entry.guid">
-                        {{entry.name}}
-                    </a></td>
+                <tr v-for="entry in hiveColumns">
                     <td>
-                        {{entry.typeName}}
+                        {{entry.attributes.name}}
                     </td>
                     <td>
-                        {{entry.status}}
-                    </td>
-                    <td>
-                        {{entry.owner}}
+                        {{entry.attributes.type}}
                     </td>
                     <td>
                         Unprocessed
@@ -30,7 +33,10 @@
                 </tr>
                 </tbody>
             </table>
-        </div>
+    </div>
+  </div>
+</div>
+    </div>
 </template>
 
 
@@ -40,15 +46,24 @@ import axios from 'axios'
 export default {
   data () {
     return {
-      posts: [],
-      errors: []
+      tableData: {},
+      errors: [],
+      guid: this.$route.params.guid
     }
   },
   created () {
-    axios.get('http://localhost:9696/v1/tables')
+    axios.get('http://localhost:9696/v1/tables/' + this.guid)
          .then(response => {
-           this.posts = response.data
+           this.tableData = response.data
          })
+  },
+  computed:{
+    hiveColumns: function() {
+      return this.tableData.referredEntities.filter(function(td){
+        var tes = td.typeName === 'hive_column'
+        return tes
+      })
+    }
   }
 }
 </script>

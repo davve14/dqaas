@@ -29,12 +29,29 @@ object HiveTableHandler {
     val result: Future[R00tJsonObject] = responseFuture flatMap { res =>
       Unmarshal(res.entity).to[R00tJsonObject]
     }
+    val DQ = new TableDQHandler()
+    DQ.runTDQEvaluation()
+    result
+  }
+  
+  def getAtlasHiveTable(tableGuid: String): Future[Source] = {
+
+    implicit val system = ActorSystem()
+
+    val authorization = headers.Authorization(BasicHttpCredentials("holger_gov","holger_gov"))
+    val responseFuture: Future[HttpResponse] = Http().singleRequest(HttpRequest(uri = "http://localhost:21000/api/atlas/v2/entity/guid/"+ tableGuid, headers = List(authorization)))
+    
+    val result: Future[Source] = responseFuture flatMap { res =>
+      Unmarshal(res.entity).to[Source]
+    }
+    val DQ = new TableDQHandler()
+    DQ.runTDQEvaluation()
     result
   }
   
   def getBody(futureResponse: Future[HttpResponse], timeout: FiniteDuration = 5.seconds): String = {
     val response = Await.result(futureResponse, timeout)
-    
+
     val bs: Future[ByteString] = response.entity.toStrict(timeout).map { _.data }
     val futureBody: Future[String] = bs.map(_.utf8String) // if you indeed need a `String`
     Await.result(futureBody, timeout)

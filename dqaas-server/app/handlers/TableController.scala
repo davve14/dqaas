@@ -1,7 +1,6 @@
 package handlers
 
 import javax.inject.Inject
-
 import play.api.Logger
 import play.api.data.Form
 import play.api.libs.json.Json
@@ -35,10 +34,6 @@ class TableController @Inject()(cc: TableControllerComponents)(implicit ec: Exec
   def index: Action[AnyContent] = TableAction.async { implicit request =>
     logger.trace("index: ")
     
-    val res = Await.result(tableResourceHandler.getTables(),2.seconds)
-    
-    println(res)
-    
     tableResourceHandler.getTables.map { tables =>
       Ok(Json.toJson(tables)).withHeaders("Access-Control-Allow-Origin" -> "*")
     }
@@ -52,8 +47,11 @@ class TableController @Inject()(cc: TableControllerComponents)(implicit ec: Exec
 
   def show(id: String): Action[AnyContent] = TableAction.async { implicit request =>
     logger.trace(s"show: id = $id")
-    tableResourceHandler.lookup(id).map { post =>
-      Ok(Json.toJson(post))
+    
+
+    
+    tableResourceHandler.getTable(id).map { table =>
+      Ok(Json.toJson(table)).withHeaders("Access-Control-Allow-Origin" -> "*")
     }
   }
 
